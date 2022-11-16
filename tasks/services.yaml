@@ -1,0 +1,7 @@
+---
+- name: Enable ans start cockpit
+  ansible.builtin.systemd:
+    name: cockpit
+    daemon_reload: yes
+    state: started
+    enabled: yes

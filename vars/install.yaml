@@ -1,0 +1,44 @@
+---
+PACKAGES:
+  - NAME: BASE
+    ENABLED: True
+    DNF: &base_dnf [ "ca-certificates", "curl", "gnupg", "snapd" ]
+    YUM: *base_dnf
+  - NAME: DEV
+    DNF: &dev_dnf [ "git", "tig", "tmux","gcc", "g++",
+                    "python3", "python2", "python3-pip", "make",
+                    "cmake", "docker-ce", "docker-ce-cli", "containerd.io",
+                    "docker-compose-plugin", "podman", "vim", "openssl",
+                    "dotnet-sdk-6.0"]
+    YUM: *dev_dnf
+  - NAME: OPS
+    DNF: &ops_dnf [ "git", "tig", "tmux", "nmap",
+                    "wget", "curl", "htop", "sudo",
+                    "ca-certificates", "net-tools", "python3", "python2",
+                    "python3-pip", "docker-ce", "docker-ce-cli", "containerd.io",
+                    "docker-compose-plugin","podman", "vim", "openssl",
+                    "vagrant", "kubectl", "ansible"]
+    YUM: *ops_dnf
+  - NAME: CLI
+    DNF: &clis_dnf [ "tmux", "mc", "wget", "curl",
+                    "tar", "zip", "unzip", "vim",
+                    "nano", "jq"]
+    YUM: *clis_dnf
+  - NAME: UI
+    DNF: &ui_dnf ["terminator", "gnome-tweaks", "code"]
+    YUM: *ui_dnf
+  - NAME: ADMIN
+    DNF: &admin_dnf [ "cockpit", "cockpit-storaged", "cockpit-storaged", cockpit-packagekit,
+                      "cockpit-packagekit", "cockpit-machines", "cockpit-podman", "cockpit-selinux",
+                      "cockpit-kdump", "cockpit-sosreport", "cockpit-composer", "cockpit-389-ds",
+                      "cockpit-session-recording", "subscription-manager-cockpit", "cockpit-file-sharing", "cockpit-navigator",
+                      #"cockpit-certificates", "cockpit-ovirt-dashboard", "cockpit-tukit", "cockpit-sensors", "cockpit-zfs",
+                      ]
+    YUM: *admin_dnf
+  - NAME: CUSTOM   
+    DNF: &custom_dnf ["stow", "zsh"]
+    YUM: *custom_dnf
+SNAP:
+  - NAME: GENERAL
+    ENABLED: False
+    LIST: ["spotify", "discord", "teams-insiders"]

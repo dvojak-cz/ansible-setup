@@ -1,0 +1,47 @@
+---
+- include_vars: 
+    name: INSTALL
+    file: "{{playbook_dir}}/vars/install.yaml"
+
+- name: Add repos
+  when: ansible_distribution == "Fedora"
+  block:
+  - name: Add docker repo
+    get_url:
+      url: https://download.docker.com/linux/fedora/docker-ce.repo
+      dest: /etc/yum.repos.d/docker.repo
+      mode: '0644'
+      owner: root
+      group: root
+  - name: Add k8s repo
+    ansible.builtin.yum_repository:
+      name: kubernetes
+      description: Kubernetes
+      file: kubernetes
+      baseurl: https://packages.cloud.google.com/yum/repos/kubernetes-el7-$basearch
+      gpgkey: https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
+      enabled: yes
+      gpgcheck: yes
+  - name: Add repo for VSCode
+    ansible.builtin.yum_repository:
+      name: code
+      description: Visual Studio Code
+      file: vscode
+      baseurl: https://packages.microsoft.com/yumrepos/vscode
+      gpgkey: https://packages.microsoft.com/keys/microsoft.asc
+      enabled: yes
+      gpgcheck: yes
+
+
+- include_tasks: "{{playbook_dir}}/tasks/helpers/install_loop_dnf.yaml"
+  loop: "{{INSTALL.PACKAGES}}"
+  when: item.ENABLED is not defined or item.ENABLED 
+  loop_control:
+    label: "{{item.NAME}}"
+
+- include_tasks: "{{playbook_dir}}/tasks/helpers/install_loop_snap.yaml"
+  loop: "{{INSTALL.SNAP}}"
+  when: item.ENABLED is not defined or item.ENABLED 
+  loop_control:
+    label: "{{item.NAME}}"
+

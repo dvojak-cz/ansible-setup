@@ -1,0 +1,10 @@
+---
+MAIN_USER: jan
+LIST:
+- name: jan
+  power: true
+  groups: ["docker"]
+  shell: /usr/bin/zsh
+  ssh: true
+- name: root
+  power: root

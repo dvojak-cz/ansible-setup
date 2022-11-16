@@ -1,0 +1,5 @@
+---
+- name: Install {{item.NAME}} snap tools
+  community.general.snap:
+    name: "{{item.LIST}}"
+  

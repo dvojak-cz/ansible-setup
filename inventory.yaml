@@ -1,1 +1,1 @@
-192.168.58.3
+localhost ansible_connection=local

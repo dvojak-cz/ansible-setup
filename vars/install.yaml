@@ -6,15 +6,15 @@ PACKAGES:
     YUM: *base_dnf
   - NAME: DEV
     DNF: &dev_dnf [ "git", "tig", "tmux","gcc", "g++",
-                    "python3", "python2", "python3-pip", "make",
+                    "python3", "python3-pip", "make",
                     "cmake", "docker-ce", "docker-ce-cli", "containerd.io",
                     "docker-compose-plugin", "podman", "vim", "openssl",
-                    "dotnet-sdk-6.0"]
+                    "dotnet-sdk-6.0", "dotnet-sdk-7.0"]
     YUM: *dev_dnf
   - NAME: OPS
     DNF: &ops_dnf [ "git", "tig", "tmux", "nmap",
                     "wget", "curl", "htop", "sudo",
-                    "ca-certificates", "net-tools", "python3", "python2",
+                    "ca-certificates", "net-tools", "python3",
                     "python3-pip", "docker-ce", "docker-ce-cli", "containerd.io",
                     "docker-compose-plugin","podman", "vim", "openssl",
                     "vagrant", "kubectl", "ansible"]

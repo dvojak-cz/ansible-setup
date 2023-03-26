@@ -17,7 +17,7 @@ PACKAGES:
                     "ca-certificates", "net-tools", "python3",
                     "python3-pip", "docker-ce", "docker-ce-cli", "containerd.io",
                     "docker-compose-plugin","podman", "vim", "openssl",
-                    "vagrant", "kubectl", "ansible"]
+                    "vagrant", "kubectl", "ansible","postgresql", "terraform"]
     YUM: *ops_dnf
   - NAME: CLI
     DNF: &clis_dnf [ "tmux", "mc", "wget", "curl",

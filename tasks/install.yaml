@@ -1,5 +1,5 @@
 ---
-- include_vars: 
+- include_vars:
     name: INSTALL
     file: "{{playbook_dir}}/vars/install.yaml"
 
@@ -31,7 +31,13 @@
       gpgkey: https://packages.microsoft.com/keys/microsoft.asc
       enabled: yes
       gpgcheck: yes
-
+  - name: Add repo for HashiCorp
+    get_url:
+      url: https://rpm.releases.hashicorp.com/fedora/hashicorp.repo
+      dest: /etc/yum.repos.d/hashicorp.repo
+      mode: '0644'
+      owner: root
+      group: root
 
 - include_tasks: "{{playbook_dir}}/tasks/helpers/install_loop_dnf.yaml"
   loop: "{{INSTALL.PACKAGES}}"

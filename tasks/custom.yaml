@@ -1,15 +1,15 @@
 ---
-- include_vars: 
+- include_vars:
     name: USERS
     file: "{{playbook_dir}}/vars/users.yaml"
-- set_fact: 
+- set_fact:
     be_user: &be_user
       become: true
       become_user: "{{USERS.MAIN_USER}}"
 - name: Install OhMyZsh
   <<: *be_user
   block:
-  - name: Get stat OHMYZSH 
+  - name: Get stat OHMYZSH
     stat:
       path: ~/.oh-my-zsh
     register: oh_my_zsh
@@ -17,15 +17,15 @@
     when: not (oh_my_zsh.stat.isdir is defined and oh_my_zsh.stat.isdir)
     block:
     - name: Download zsh installer
-      get_url: 
-        url: https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh 
+      get_url:
+        url: https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh
         dest: /tmp/zsh-installer.sh
         mode: '0700'
     - name: Execute the zsh-installer.sh
       shell: CHSH=no RUNZSH=no /tmp/zsh-installer.sh
     - name: Remove the zsh-installer.sh
-      file: 
-        path: /tmp/zsh-installer.sh 
+      file:
+        path: /tmp/zsh-installer.sh
         state: absent
 
 - name: Create folders

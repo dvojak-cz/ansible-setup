@@ -1,0 +1,11 @@
+---
+- include_vars:
+    name: HOSTS
+    file: "{{playbook_dir}}/vars/hosts.yaml"
+- name: Add DNS record to /etc/hosts
+  loop: "{{ HOSTS.HOSTS }}"
+  lineinfile:
+    path: /etc/hosts
+    line: "{{item.ip}}\t{{item.names | join(' ')}}"
+    state: present
+ 

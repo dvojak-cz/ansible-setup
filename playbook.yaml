@@ -4,6 +4,7 @@
   tasks:
     - include_tasks: ./tasks/install.yaml
     - include_tasks: ./tasks/services.yaml
+    - include_tasks: ./tasks/hosts.yaml
     - include_tasks: ./tasks/users.yaml
     - include_tasks: ./tasks/custom.yaml
       

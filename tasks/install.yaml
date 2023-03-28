@@ -13,6 +13,13 @@
       mode: '0644'
       owner: root
       group: root
+  - name: Add lens repo
+    get_url:
+      url: https://downloads.k8slens.dev/rpm/lens.repo
+      dest: /etc/yum.repos.d/lens.repo
+      mode: '0644'
+      owner: root
+      group: root
   - name: Add k8s repo
     ansible.builtin.yum_repository:
       name: kubernetes
